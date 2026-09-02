@@ -1,0 +1,853 @@
+{
+  "info": {
+    "_postman_id": "ebede5c8-0ce5-4c54-be2e-6b3f212fb090",
+    "name": "AtlasLogix QA Assessment API - Adham Ibrahim",
+    "description": "Candidate collection for the isolated AtlasLogix multi-tenant frontend assessment environment. Run Auth - Login first; the collection stores the bearer token and accessible tenants automatically. Tenant administration requests require the supplied tenant-administrator account.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "37210911"
+  },
+  "item": [
+    {
+      "name": "Auth - Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Login succeeded', () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.collectionVariables.set('token', data.token);",
+              "pm.collectionVariables.set('tenantId', data.tenantId);",
+              "pm.collectionVariables.set('userId', data.userId);",
+              "pm.collectionVariables.set('role', data.role);",
+              "pm.collectionVariables.set('permissions', JSON.stringify(data.permissions || []));",
+              "pm.collectionVariables.set('tenants', JSON.stringify(data.tenants || []));",
+              "const secondary = (data.tenants || []).find(item => item.tenantId !== data.tenantId);",
+              "if (secondary) pm.collectionVariables.set('secondaryTenantId', secondary.tenantId);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth - Current User & Permissions",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/auth/me",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "auth",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tenant Admin - List Tenants",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/tenants",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "tenants"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tenant Admin - Create Tenant",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Tenant created', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('createdTenantId', pm.response.json().tenantId);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"AtlasLogix APAC\",\n  \"region\": \"Asia Pacific\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/tenants",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "tenants"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tenant Admin - Edit or Deactivate Tenant",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"AtlasLogix Asia Pacific\",\n  \"isActive\": false\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/tenants/{{createdTenantId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "tenants",
+            "{{createdTenantId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tenant Admin - List Users",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const users = pm.response.json().data || [];",
+              "const target = users.find(item => item.role !== 'TENANT_ADMIN');",
+              "if (target) pm.collectionVariables.set('targetUserId', target.userId);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/tenants/{{tenantId}}/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "tenants",
+            "{{tenantId}}",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tenant Admin - Change User Role or Activation",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"role\": \"Operations Manager\",\n  \"isActive\": true\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/tenants/{{tenantId}}/users/{{targetUserId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "tenants",
+            "{{tenantId}}",
+            "users",
+            "{{targetUserId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Shipments - List",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Shipment list succeeded', () => pm.response.to.have.status(200));",
+              "const results = pm.response.json().results || [];",
+              "const pending = results.find(item => item.shipmentId.endsWith('-PENDING'));",
+              "const approved = results.find(item => item.shipmentId.endsWith('-APPROVED'));",
+              "const noData = results.find(item => item.shipmentId.endsWith('-NODATA'));",
+              "const rejected = results.find(item => item.shipmentId.endsWith('-REJECTED'));",
+              "if (pending) pm.collectionVariables.set('shipmentId', pending.shipmentId);",
+              "if (approved) pm.collectionVariables.set('approvedShipmentId', approved.shipmentId);",
+              "if (noData) pm.collectionVariables.set('noSensorShipmentId', noData.shipmentId);",
+              "if (rejected) pm.collectionVariables.set('rejectedShipmentId', rejected.shipmentId);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/tenants/{{tenantId}}/shipments?ordering=-last_updated",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "tenants",
+            "{{tenantId}}",
+            "shipments"
+          ],
+          "query": [
+            {
+              "key": "ordering",
+              "value": "-last_updated"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Shipments - Detail",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "const response = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Response is valid JSON\", function () {\r",
+              "    pm.expect(response).to.be.an(\"object\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Shipment ID exists\", function () {\r",
+              "    pm.expect(response.shipmentId).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Tenant ID exists\", function () {\r",
+              "    pm.expect(response.tenantId).to.exist;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/shipments/{{shipmentId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "shipments",
+            "{{shipmentId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Shipments - Sensor Latest",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/shipments/{{shipmentId}}/sensor-data",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "shipments",
+            "{{shipmentId}}",
+            "sensor-data"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Shipments - Sensor History",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Sensor history succeeded', () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test('History contains chronological events', () => {",
+              "  pm.expect(data.data).to.be.an('array');",
+              "  for (let i = 1; i < data.data.length; i += 1) {",
+              "    pm.expect(new Date(data.data[i].timestamp).getTime()).to.be.at.least(new Date(data.data[i - 1].timestamp).getTime());",
+              "  }",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/shipments/{{shipmentId}}/sensor-data/history?limit=50",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "shipments",
+            "{{shipmentId}}",
+            "sensor-data",
+            "history"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "50"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Shipments - Sensor No Content (204)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('No sensor data returns 204', () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/shipments/{{noSensorShipmentId}}/sensor-data",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "shipments",
+            "{{noSensorShipmentId}}",
+            "sensor-data"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Shipments - Compliance Approve",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const status = pm.response.code;\r",
+              "\r",
+              "pm.test(\"Approval request returns expected status\", function () {\r",
+              "    pm.expect([200, 409]).to.include(status);\r",
+              "});\r",
+              "\r",
+              "if (status == 200) {\r",
+              "    const response = pm.response.json();\r",
+              "\r",
+              "    pm.test(\"Shipment ID exists\", function () {\r",
+              "        pm.expect(response.shipmentId).to.exist;\r",
+              "    });\r",
+              "\r",
+              "    pm.test(\"Compliance status is APPROVED\", function () {\r",
+              "        pm.expect(response.compliance_status).to.eql(\"APPROVED\");\r",
+              "    });\r",
+              "}\r",
+              "\r",
+              "if (status == 409) {\r",
+              "    pm.test(\"Repeated approval is rejected with 409\", function () {\r",
+              "        pm.response.to.have.status(409);\r",
+              "    });\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/shipments/{{shipmentId}}/compliance/approve",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "shipments",
+            "{{shipmentId}}",
+            "compliance",
+            "approve"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Shipments - Compliance Report",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "const response = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Shipment ID exists\", function () {\r",
+              "    pm.expect(response.shipmentId).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Compliance status exists\", function () {\r",
+              "    pm.expect(response.complianceStatus).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Sensor confidence exists\", function () {\r",
+              "    pm.expect(response.sensorConfidence).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Sensor event count is valid\", function () {\r",
+              "    pm.expect(response.sensorEventCount).to.be.at.least(0);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/shipments/{{shipmentId}}/compliance/report",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "shipments",
+            "{{shipmentId}}",
+            "compliance",
+            "report"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Audit Logs",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "const response = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Response contains data array\", function () {\r",
+              "    pm.expect(response.data).to.be.an(\"array\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Audit records exist\", function () {\r",
+              "    pm.expect(response.data.length).to.be.above(0);\r",
+              "});\r",
+              "\r",
+              "if (response.data.length > 0) {\r",
+              "    pm.test(\"Audit record contains required fields\", function () {\r",
+              "        const record = response.data[0];\r",
+              "\r",
+              "        pm.expect(record).to.have.property(\"entity\");\r",
+              "        pm.expect(record).to.have.property(\"entity_id\");\r",
+              "        pm.expect(record).to.have.property(\"field\");\r",
+              "        pm.expect(record).to.have.property(\"before\");\r",
+              "        pm.expect(record).to.have.property(\"after\");\r",
+              "        pm.expect(record).to.have.property(\"changed_by\");\r",
+              "        pm.expect(record).to.have.property(\"timestamp\");\r",
+              "    });\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/audit-logs?entity=shipment&entityId={{shipmentId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "audit-logs"
+          ],
+          "query": [
+            {
+              "key": "entity",
+              "value": "shipment"
+            },
+            {
+              "key": "entityId",
+              "value": "{{shipmentId}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "SSE - Create Stream Ticket",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Stream ticket created', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('streamTicket', pm.response.json().ticket);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tenantId\": \"{{tenantId}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/stream/tickets",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "stream",
+            "tickets"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "SSE - Sensor Stream",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/event-stream"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/stream/sensor-data?ticket={{streamTicket}}&interval=3",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "stream",
+            "sensor-data"
+          ],
+          "query": [
+            {
+              "key": "ticket",
+              "value": "{{streamTicket}}"
+            },
+            {
+              "key": "interval",
+              "value": "3"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://assessment.nexus-grid.ai"
+    },
+    {
+      "key": "email",
+      "value": "qa.adham.ibrahim@atlaslogix.test"
+    },
+    {
+      "key": "password",
+      "value": "yE9kWQfA-C11EX2O"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "tenantId",
+      "value": "TENANT-ADHAM-IBRAHIM-QA29"
+    },
+    {
+      "key": "userId",
+      "value": "user-ADHAM-IBRAHIM-QA29-auditor"
+    },
+    {
+      "key": "role",
+      "value": ""
+    },
+    {
+      "key": "permissions",
+      "value": ""
+    },
+    {
+      "key": "tenants",
+      "value": ""
+    },
+    {
+      "key": "secondaryTenantId",
+      "value": "TENANT-ADHAM-IBRAHIM-QA29-MENA"
+    },
+    {
+      "key": "createdTenantId",
+      "value": ""
+    },
+    {
+      "key": "targetUserId",
+      "value": "user-ADHAM-IBRAHIM-QA29-operations"
+    },
+    {
+      "key": "shipmentId",
+      "value": "SHIP-ADHAM-IBRAHIM-QA29-PENDING"
+    },
+    {
+      "key": "approvedShipmentId",
+      "value": "SHIP-ADHAM-IBRAHIM-QA29-APPROVED"
+    },
+    {
+      "key": "noSensorShipmentId",
+      "value": "SHIP-ADHAM-IBRAHIM-QA29-NODATA"
+    },
+    {
+      "key": "rejectedShipmentId",
+      "value": "SHIP-ADHAM-IBRAHIM-QA29-REJECTED"
+    },
+    {
+      "key": "streamTicket",
+      "value": ""
+    }
+  ]
+}
