@@ -1,0 +1,60 @@
+Coverage Matrix,,,,,
+ID,Area,Test Scenario,Method,Coverage ,Priority
+AUTH-01,Authentication,Login with valid Compliance Auditor credentials,UI + Automation,Covered,P0
+AUTH-02,Authentication,Login with invalid credentials,UI,Covered,P1
+AUTH-03,Authentication,Login with supplied non-Auditor roles,UI,BLOCKED,P0
+TEN-01,Tenant Management,Switch between assigned tenants,UI + Automation,Covered,P0
+TEN-02,Tenant Isolation,Verify tenant context/data remains isolated,UI + API,Covered,P0
+SHP-01,Shipments,Open Shipments page and discover shipments,UI,Covered,P1
+SHP-02,Shipments,Search/open shipment details,UI + API,Covered,P1
+CMP-01,Compliance,View compliance status,UI + API,Covered,P0
+CMP-02,Compliance,Auditor approval of eligible shipment,UI + API,Covered,P0
+CMP-03,Compliance,Approval confirmation workflow,UI,Covered,P0
+CMP-04,Compliance,Repeated approval of already-approved shipment,API,Covered,P0
+CMP-05,Compliance,Unauthorized approval using other roles,UI + API,BLOCKED,P0
+SEN-01,Sensor Data,View sensor data for shipment,UI + API,Covered,P1
+SEN-02,Sensor Data,Sensor history / trend data,API + UI,Covered,P1
+SEN-03,Sensor Data,No sensor data / 204 No Content response,UI + API + Automation,Covered,P1
+SEN-04,Sensor Data,Sensor values and confidence information,API + UI,Covered,P1
+SEN-05,Sensor Data,Sensor error/status communication,UI,Covered,P1
+STR-01,Live Streaming,Start live sensor stream,UI + API,Covered,P1
+STR-02,Live Streaming,Receive streaming sensor records,UI + API,Covered,P1
+STR-03,Live Streaming,Reconnect/recovery after interruption,UI,Covered,P1
+STR-04,Live Streaming,Invalid stream ticket rejected,API,Covered,P1
+AUD-01,Audit,Retrieve shipment audit logs,API,Covered,P0
+AUD-02,Audit,Verify approval is reflected in audit history,API,Covered,P0
+REP-01,Compliance Reports,Approved shipment compliance report,API + UI,Covered,P1
+REP-02,Compliance Reports,Rejected shipment compliance report,API,Covered,P1
+REP-03,Compliance Reports,No-data compliance report,API,Covered,P1
+REP-04,Compliance Reports,Report structure and key compliance fields,API,Covered,P1
+API-01,API Contract,Validate API response structures/status codes,API,Covered,P1
+API-02,API Authorization,/auth/me returns correct role/permissions/tenant,API,Covered,P0
+API-03,API Authorization,Unauthorized role access,API,BLOCKED ,P0
+API-04,API,Shipment details endpoint,API,Covered,P1
+API-05,API,Sensor history endpoint,API,Covered,P1
+API-06,API,Compliance report endpoint,API,Covered,P1
+API-07,API,Stream ticket endpoint,API,Covered,P1
+API-08,API,Invalid stream ticket,API,Covered,P1
+A11Y-01,Accessibility,Login keyboard navigation and focus,Manual,Covered,P1
+A11Y-02,Accessibility,Dashboard keyboard navigation and focus,Manual,Covered,P1
+A11Y-03,Accessibility,Shipments page keyboard navigation/focus,Manual,Covered,P1
+A11Y-04,Accessibility,Shipment Details drawer traps keyboard focus,Manual,Covered,P1
+A11Y-05,Accessibility,Escape closes Shipment Details drawer,Manual,Covered,P1
+A11Y-06,Accessibility,Sensor chart values available without hover,Manual,Covered,P1
+A11Y-07,Accessibility,Sensor error/status communicated accessibly,Manual,Covered,P1
+A11Y-08,Accessibility,Compliance status communicated clearly,Manual,Covered,P1
+RESP-01,Responsive,Mobile layout at 375×667,Manual,Covered,P2
+DES-01,Design,Compare implementation with supplied design baseline,Manual,Covered,P2
+,,,,,
+Coverage Summary,,,,,
+Status,Count,,,,
+Covered,42,,,,
+BLOCKED,3,,,,
+Total,45,,,,
+,,,,,
+Key Coverage Notes,,,,,
+"P0 risks: Authentication, tenant isolation, authorization, compliance approval, repeated approval, and auditability were prioritized.",,,,,
+"Non-Auditor RBAC scenarios are marked Blocked, because the supplied role accounts could not authenticate. This is an environment/test-account limitation and is not classified as a confirmed product defect.",,,,,
+Accessibility findings were validated through manual keyboard/focus testing. The automated axe check was blocked by the browser/tool environment.,,,,,
+"The three confirmed accessibility defects concern dialog focus management, Escape-key behavior, and chart data accessibility.",,,,,
+Responsive testing identified a mobile visibility issue at 375×667.,,,,,
