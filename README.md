@@ -126,8 +126,8 @@ The executed testing identified defects related to:
 
 Detailed reproduction steps, expected/actual results, severity, priority, evidence and environment information are available in:
 
-`docs/Defect Report.xlsx`
-`Evidence/`
+* `docs/Defect Report.xlsx`
+* `Evidence/`
 
 ## Test Results
 
