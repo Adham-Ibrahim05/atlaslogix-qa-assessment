@@ -5,6 +5,7 @@ AUTH-02,Authentication,Login with invalid credentials,UI,Covered,P1
 AUTH-03,Authentication,Login with supplied non-Auditor roles,UI,Covered,P0
 TEN-01,Tenant Management,Switch between assigned tenants,UI + Automation,Covered,P0
 TEN-02,Tenant Isolation,Verify tenant context/data remains isolated,UI + API,Covered,P0
+ADM-01,Administration,Tenant Administrator can access and use permitted administration functionality,UI,Covered,P0
 SHP-01,Shipments,Open Shipments page and discover shipments,UI,Covered,P1
 SHP-02,Shipments,Search/open shipment details,UI + API,Covered,P1
 CMP-01,Compliance,View compliance status,UI + API,Covered,P0
