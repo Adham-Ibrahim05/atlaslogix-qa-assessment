@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "ebede5c8-0ce5-4c54-be2e-6b3f212fb090",
+    "_postman_id": "e6b05e14-510b-4771-9672-692acc162138",
     "name": "AtlasLogix QA Assessment API - Adham Ibrahim",
     "description": "Candidate collection for the isolated AtlasLogix multi-tenant frontend assessment environment. Run Auth - Login first; the collection stores the bearer token and accessible tenants automatically. Tenant administration requests require the supplied tenant-administrator account.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -13,19 +13,39 @@
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
-              "pm.test('Login succeeded', () => pm.response.to.have.status(200));",
-              "const data = pm.response.json();",
-              "pm.collectionVariables.set('token', data.token);",
-              "pm.collectionVariables.set('tenantId', data.tenantId);",
-              "pm.collectionVariables.set('userId', data.userId);",
-              "pm.collectionVariables.set('role', data.role);",
-              "pm.collectionVariables.set('permissions', JSON.stringify(data.permissions || []));",
-              "pm.collectionVariables.set('tenants', JSON.stringify(data.tenants || []));",
-              "const secondary = (data.tenants || []).find(item => item.tenantId !== data.tenantId);",
-              "if (secondary) pm.collectionVariables.set('secondaryTenantId', secondary.tenantId);"
-            ]
+              "pm.test(\"Login succeeded\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "var loginData = pm.response.json();",
+              "",
+              "pm.environment.set(\"token\", loginData.token);",
+              "pm.environment.set(\"tenantId\", loginData.tenantId);",
+              "pm.environment.set(\"userId\", loginData.userId);",
+              "pm.environment.set(\"role\", loginData.role);",
+              "",
+              "pm.environment.set(",
+              "    \"permissions\",",
+              "    JSON.stringify(loginData.permissions || [])",
+              ");",
+              "",
+              "pm.environment.set(",
+              "    \"tenants\",",
+              "    JSON.stringify(loginData.tenants || [])",
+              ");",
+              "",
+              "var secondary = (loginData.tenants || []).find(function (item) {",
+              "    return item.tenantId !== loginData.tenantId;",
+              "});",
+              "",
+              "if (secondary) {",
+              "    pm.environment.set(\"secondaryTenantId\", secondary.tenantId);",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -118,11 +138,13 @@
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "pm.test('Tenant created', () => pm.response.to.have.status(201));",
               "pm.collectionVariables.set('createdTenantId', pm.response.json().tenantId);"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -195,12 +217,14 @@
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "const users = pm.response.json().data || [];",
               "const target = users.find(item => item.role !== 'TENANT_ADMIN');",
               "if (target) pm.collectionVariables.set('targetUserId', target.userId);"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -269,7 +293,6 @@
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "pm.test('Shipment list succeeded', () => pm.response.to.have.status(200));",
               "const results = pm.response.json().results || [];",
@@ -281,7 +304,10 @@
               "if (approved) pm.collectionVariables.set('approvedShipmentId', approved.shipmentId);",
               "if (noData) pm.collectionVariables.set('noSensorShipmentId', noData.shipmentId);",
               "if (rejected) pm.collectionVariables.set('rejectedShipmentId', rejected.shipmentId);"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
