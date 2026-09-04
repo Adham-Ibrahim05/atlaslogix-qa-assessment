@@ -1,0 +1,10 @@
+[INFO] 04-09-2026 22:41:15 [main] [Listeners.IInvokedMethodListenerClass.beforeInvocation(IInvokedMethodListenerClass.java:22)] - Test Case Fri Sep 04 22:41:15 EEST 2026
+[INFO] 04-09-2026 22:41:16 [main] [Test_Scripts.BaseTest.Setup(BaseTest.java:37)] - Browser is Opened
+[INFO] 04-09-2026 22:41:17 [main] [Test_Scripts.BaseTest.Setup(BaseTest.java:41)] - Page is redirecting to the URL
+[INFO] 04-09-2026 22:41:18 [main] [Listeners.IInvokedMethodListenerClass.afterInvocation(IInvokedMethodListenerClass.java:34)] - Test Case Setup passed
+[INFO] 04-09-2026 22:41:18 [main] [Listeners.ITestResultMethodListenerClass.onTestStart(ITestResultMethodListenerClass.java:10)] - Test Case Unauthorized_Approval_Permission_PathStarted
+[INFO] 04-09-2026 22:41:18 [main] [Listeners.IInvokedMethodListenerClass.beforeInvocation(IInvokedMethodListenerClass.java:22)] - Test Case Fri Sep 04 22:41:15 EEST 2026
+[INFO] 04-09-2026 22:41:20 [main] [Listeners.IInvokedMethodListenerClass.afterInvocation(IInvokedMethodListenerClass.java:34)] - Test Case Unauthorized_Approval_Permission_Path passed
+[INFO] 04-09-2026 22:41:20 [main] [Listeners.ITestResultMethodListenerClass.onTestSuccess(ITestResultMethodListenerClass.java:14)] - Test Case Unauthorized_Approval_Permission_PathPassed
+[INFO] 04-09-2026 22:41:20 [main] [Listeners.IInvokedMethodListenerClass.beforeInvocation(IInvokedMethodListenerClass.java:22)] - Test Case Fri Sep 04 22:41:15 EEST 2026
+[INFO] 04-09-2026 22:41:20 [main] [Listeners.IInvokedMethodListenerClass.afterInvocation(IInvokedMethodListenerClass.java:34)] - Test Case Quit passed

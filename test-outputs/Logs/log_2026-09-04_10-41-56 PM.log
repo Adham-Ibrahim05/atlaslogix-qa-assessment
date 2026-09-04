@@ -1,0 +1,30 @@
+[INFO] 04-09-2026 22:41:56 [main] [Listeners.IInvokedMethodListenerClass.beforeInvocation(IInvokedMethodListenerClass.java:22)] - Test Case Fri Sep 04 22:41:55 EEST 2026
+[INFO] 04-09-2026 22:41:57 [main] [Test_Scripts.BaseTest.Setup(BaseTest.java:37)] - Browser is Opened
+[INFO] 04-09-2026 22:41:58 [main] [Test_Scripts.BaseTest.Setup(BaseTest.java:41)] - Page is redirecting to the URL
+[INFO] 04-09-2026 22:41:59 [main] [Listeners.IInvokedMethodListenerClass.afterInvocation(IInvokedMethodListenerClass.java:34)] - Test Case Setup passed
+[INFO] 04-09-2026 22:41:59 [main] [Listeners.ITestResultMethodListenerClass.onTestStart(ITestResultMethodListenerClass.java:10)] - Test Case Login_TenantSwitchingStarted
+[INFO] 04-09-2026 22:41:59 [main] [Listeners.IInvokedMethodListenerClass.beforeInvocation(IInvokedMethodListenerClass.java:22)] - Test Case Fri Sep 04 22:41:55 EEST 2026
+[INFO] 04-09-2026 22:41:59 [main] [Listeners.IInvokedMethodListenerClass.afterInvocation(IInvokedMethodListenerClass.java:34)] - Test Case Login_TenantSwitching passed
+[INFO] 04-09-2026 22:41:59 [main] [Listeners.ITestResultMethodListenerClass.onTestSuccess(ITestResultMethodListenerClass.java:14)] - Test Case Login_TenantSwitchingPassed
+[INFO] 04-09-2026 22:41:59 [main] [Listeners.IInvokedMethodListenerClass.beforeInvocation(IInvokedMethodListenerClass.java:22)] - Test Case Fri Sep 04 22:41:55 EEST 2026
+[INFO] 04-09-2026 22:42:00 [main] [Listeners.IInvokedMethodListenerClass.afterInvocation(IInvokedMethodListenerClass.java:34)] - Test Case Quit passed
+[INFO] 04-09-2026 22:42:00 [main] [Listeners.IInvokedMethodListenerClass.beforeInvocation(IInvokedMethodListenerClass.java:22)] - Test Case Fri Sep 04 22:41:55 EEST 2026
+[INFO] 04-09-2026 22:42:01 [main] [Test_Scripts.BaseTest.Setup(BaseTest.java:37)] - Browser is Opened
+[INFO] 04-09-2026 22:42:01 [main] [Test_Scripts.BaseTest.Setup(BaseTest.java:41)] - Page is redirecting to the URL
+[INFO] 04-09-2026 22:42:02 [main] [Listeners.IInvokedMethodListenerClass.afterInvocation(IInvokedMethodListenerClass.java:34)] - Test Case Setup passed
+[INFO] 04-09-2026 22:42:02 [main] [Listeners.ITestResultMethodListenerClass.onTestStart(ITestResultMethodListenerClass.java:10)] - Test Case Sensor_NoDataStarted
+[INFO] 04-09-2026 22:42:02 [main] [Listeners.IInvokedMethodListenerClass.beforeInvocation(IInvokedMethodListenerClass.java:22)] - Test Case Fri Sep 04 22:41:55 EEST 2026
+[INFO] 04-09-2026 22:42:03 [main] [Listeners.IInvokedMethodListenerClass.afterInvocation(IInvokedMethodListenerClass.java:34)] - Test Case Sensor_NoData passed
+[INFO] 04-09-2026 22:42:03 [main] [Listeners.ITestResultMethodListenerClass.onTestSuccess(ITestResultMethodListenerClass.java:14)] - Test Case Sensor_NoDataPassed
+[INFO] 04-09-2026 22:42:03 [main] [Listeners.IInvokedMethodListenerClass.beforeInvocation(IInvokedMethodListenerClass.java:22)] - Test Case Fri Sep 04 22:41:55 EEST 2026
+[INFO] 04-09-2026 22:42:03 [main] [Listeners.IInvokedMethodListenerClass.afterInvocation(IInvokedMethodListenerClass.java:34)] - Test Case Quit passed
+[INFO] 04-09-2026 22:42:03 [main] [Listeners.IInvokedMethodListenerClass.beforeInvocation(IInvokedMethodListenerClass.java:22)] - Test Case Fri Sep 04 22:41:55 EEST 2026
+[INFO] 04-09-2026 22:42:04 [main] [Test_Scripts.BaseTest.Setup(BaseTest.java:37)] - Browser is Opened
+[INFO] 04-09-2026 22:42:05 [main] [Test_Scripts.BaseTest.Setup(BaseTest.java:41)] - Page is redirecting to the URL
+[INFO] 04-09-2026 22:42:06 [main] [Listeners.IInvokedMethodListenerClass.afterInvocation(IInvokedMethodListenerClass.java:34)] - Test Case Setup passed
+[INFO] 04-09-2026 22:42:06 [main] [Listeners.ITestResultMethodListenerClass.onTestStart(ITestResultMethodListenerClass.java:10)] - Test Case Unauthorized_Approval_Permission_PathStarted
+[INFO] 04-09-2026 22:42:06 [main] [Listeners.IInvokedMethodListenerClass.beforeInvocation(IInvokedMethodListenerClass.java:22)] - Test Case Fri Sep 04 22:41:55 EEST 2026
+[INFO] 04-09-2026 22:42:08 [main] [Listeners.IInvokedMethodListenerClass.afterInvocation(IInvokedMethodListenerClass.java:34)] - Test Case Unauthorized_Approval_Permission_Path passed
+[INFO] 04-09-2026 22:42:08 [main] [Listeners.ITestResultMethodListenerClass.onTestSuccess(ITestResultMethodListenerClass.java:14)] - Test Case Unauthorized_Approval_Permission_PathPassed
+[INFO] 04-09-2026 22:42:08 [main] [Listeners.IInvokedMethodListenerClass.beforeInvocation(IInvokedMethodListenerClass.java:22)] - Test Case Fri Sep 04 22:41:55 EEST 2026
+[INFO] 04-09-2026 22:42:08 [main] [Listeners.IInvokedMethodListenerClass.afterInvocation(IInvokedMethodListenerClass.java:34)] - Test Case Quit passed

@@ -18,8 +18,8 @@ import static Utilities.DataUtility.GetPropertiesDataFromFile;
 @Listeners({IInvokedMethodListenerClass.class, ITestResultMethodListenerClass.class})
 public class BaseTest {
 
-    protected String Email = GetJsonData("Dataset","Compliance Auditor Username");
-    protected String Password = GetJsonData("Dataset","Compliance Auditor Password");
+    protected String Email = GetJsonData("Dataset","Admin Username");
+    protected String Password = GetJsonData("Dataset","Admin Password");
     protected String Role = GetJsonData("Dataset","Role Assertion");
 
     @Parameters({"browser"})

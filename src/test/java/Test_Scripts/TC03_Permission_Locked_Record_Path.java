@@ -12,17 +12,17 @@ import static DriverFactory.Driver_Factory.GetDriver;
 import static Utilities.DataUtility.GetJsonData;
 
 @Listeners({IInvokedMethodListenerClass.class, ITestResultMethodListenerClass.class})
-public class TC02_Sensor_No_Data_Path extends BaseTest{
+public class TC03_Permission_Locked_Record_Path extends BaseTest{
 
-    protected String SensorNoDataMessage = GetJsonData("Dataset","Sensor Assertion");
-    protected String Shipment = GetJsonData("Dataset","NODATA Shipment");
+    protected String PermissionMessage = GetJsonData("Dataset","Permission Assertion");
+    protected String Pending_Shipment = GetJsonData("Dataset","Pending Shipment");
 
     @Test
-    public void Sensor_NoData(){
+    public void Unauthorized_Approval_Permission_Path(){
         ShipmentsPage shipmentsPage = new ShipmentsPage(GetDriver());
         shipmentsPage
                 .NavigateToShipmentsPage()
-                .ShipmentDetails(Shipment);
-        Assert.assertTrue(shipmentsPage. isSensorDataErrorDisplayed(SensorNoDataMessage));
+                .ApproveCompliance(Pending_Shipment);
+        Assert.assertTrue(shipmentsPage. isApprovalErrorDisplayed(PermissionMessage));
     }
 }

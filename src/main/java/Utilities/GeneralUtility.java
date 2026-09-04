@@ -162,6 +162,11 @@ public class GeneralUtility {
 
         return files[0];
     }
+
+    //TODO: create JavaScript Alert Dialog method
+    public static void AcceptAlert(WebDriver driver) {
+        driver.switchTo().alert().accept();
+    }
 }
 
 

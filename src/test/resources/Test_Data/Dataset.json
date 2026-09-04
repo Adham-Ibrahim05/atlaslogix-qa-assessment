@@ -1,8 +1,11 @@
 {
-  "Compliance Auditor Username": "qa.adham.ibrahim@atlaslogix.test",
-  "Compliance Auditor Password": "yE9kWQfA-C11EX2O",
-  "Role Assertion": "Compliance Auditor",
+  "Admin Username": "admin.adham-ibrahim@atlaslogix.test",
+  "Admin Password": "yZldTj2_WNjMtiu5",
+  "Role Assertion": "Tenant Admin",
   "Region Assertion": "Middle East & North Africa",
-  "Shipment Name": "SHIP-ADHAM-IBRAHIM-QA29-NODATA",
-  "Sensor Assertion": "Unable to load sensor data."
+  "NODATA Shipment": "SHIP-ADHAM-IBRAHIM-QA29-NODATA",
+  "Pending Shipment": "SHIP-ADHAM-IBRAHIM-QA29-HOT-EXCURSION",
+  "Sensor Assertion": "Unable to load sensor data.",
+  "Permission Assertion": "Approval failed. Please try again."
+
 }
