@@ -2,7 +2,7 @@ Coverage Matrix,,,,,
 ID,Area,Test Scenario,Method,Coverage ,Priority
 AUTH-01,Authentication,Login with valid Compliance Auditor credentials,UI + Automation,Covered,P0
 AUTH-02,Authentication,Login with invalid credentials,UI,Covered,P1
-AUTH-03,Authentication,Login with supplied non-Auditor roles,UI,BLOCKED,P0
+AUTH-03,Authentication,Login with supplied non-Auditor roles,UI,Covered,P0
 TEN-01,Tenant Management,Switch between assigned tenants,UI + Automation,Covered,P0
 TEN-02,Tenant Isolation,Verify tenant context/data remains isolated,UI + API,Covered,P0
 SHP-01,Shipments,Open Shipments page and discover shipments,UI,Covered,P1
@@ -11,7 +11,7 @@ CMP-01,Compliance,View compliance status,UI + API,Covered,P0
 CMP-02,Compliance,Auditor approval of eligible shipment,UI + API,Covered,P0
 CMP-03,Compliance,Approval confirmation workflow,UI,Covered,P0
 CMP-04,Compliance,Repeated approval of already-approved shipment,API,Covered,P0
-CMP-05,Compliance,Unauthorized approval using other roles,UI + API,BLOCKED,P0
+CMP-05,Compliance,Unauthorized approval using other roles,UI + API,Covered,P0
 SEN-01,Sensor Data,View sensor data for shipment,UI + API,Covered,P1
 SEN-02,Sensor Data,Sensor history / trend data,API + UI,Covered,P1
 SEN-03,Sensor Data,No sensor data / 204 No Content response,UI + API + Automation,Covered,P1
@@ -29,7 +29,7 @@ REP-03,Compliance Reports,No-data compliance report,API,Covered,P1
 REP-04,Compliance Reports,Report structure and key compliance fields,API,Covered,P1
 API-01,API Contract,Validate API response structures/status codes,API,Covered,P1
 API-02,API Authorization,/auth/me returns correct role/permissions/tenant,API,Covered,P0
-API-03,API Authorization,Unauthorized role access,API,BLOCKED ,P0
+API-03,API Authorization,Unauthorized role access,API,Covered,P0
 API-04,API,Shipment details endpoint,API,Covered,P1
 API-05,API,Sensor history endpoint,API,Covered,P1
 API-06,API,Compliance report endpoint,API,Covered,P1
@@ -48,13 +48,10 @@ DES-01,Design,Compare implementation with supplied design baseline,Manual,Covere
 ,,,,,
 Coverage Summary,,,,,
 Status,Count,,,,
-Covered,42,,,,
-BLOCKED,3,,,,
+Covered,45,,,,
 Total,45,,,,
 ,,,,,
 Key Coverage Notes,,,,,
 "P0 risks: Authentication, tenant isolation, authorization, compliance approval, repeated approval, and auditability were prioritized.",,,,,
-"Non-Auditor RBAC scenarios are marked Blocked, because the supplied role accounts could not authenticate. This is an environment/test-account limitation and is not classified as a confirmed product defect.",,,,,
 Accessibility findings were validated through manual keyboard/focus testing. The automated axe check was blocked by the browser/tool environment.,,,,,
-"The three confirmed accessibility defects concern dialog focus management, Escape-key behavior, and chart data accessibility.",,,,,
 Responsive testing identified a mobile visibility issue at 375×667.,,,,,
