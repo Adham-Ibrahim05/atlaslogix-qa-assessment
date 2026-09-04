@@ -156,5 +156,3 @@ The recommendation is based on:
 AI assistance was used during preparation of this assessment for documentation support, test analysis, structuring, and review.
 
 All testing activities, observations, defect validation, and final conclusions were personally reviewed against the application behavior and assessment requirements.
-
-AI was not used to claim unexecuted tests as passed.
