@@ -24,6 +24,7 @@ The assessment covers risk-based testing, functional validation, UI and API auto
 The testing scope included:
 
 * Authentication and role-based access
+* Role permission boundaries
 * Tenant selection and tenant isolation
 * Shipment discovery and details
 * Compliance status and approval workflow
@@ -41,14 +42,28 @@ The testing scope included:
 A risk-based testing approach was used, prioritizing:
 
 1. Authentication and access control
-2. Tenant isolation
-3. Compliance and approval workflows
-4. Sensor data integrity and no-data handling
-5. Live streaming and recovery
-6. Auditability
-7. Accessibility
-8. Responsive behavior
-9. UI consistency with the provided design reference
+2. Role-based access control and permission boundaries
+3. Tenant isolation
+4. Compliance and approval workflows
+5. Sensor data integrity and no-data handling
+6. Live streaming and recovery
+7. Auditability
+8. Accessibility
+9. Responsive behavior
+10. UI consistency with the provided design reference
+
+## Roles & RBAC Validation
+
+Role-based access was tested across the available application roles to verify that permissions and restricted actions were enforced correctly.
+
+The validation included:
+
+* Login and access behavior for the supplied roles
+* Visibility of role-specific features
+* Access to permitted functionality
+* Restriction of unauthorized actions
+* Compliance approval/denial permissions
+* Tenant-level access boundaries
 
 ## Automation
 
@@ -60,25 +75,31 @@ A risk-based testing approach was used, prioritizing:
 * Java
 * TestNG
 
+UI automation was used to validate key end-to-end workflows and repeatable functional scenarios.
+
 ### API Automation
 
-**Tool:**
+**Tools:**
 
 * Postman
+* Newman
 
-The supplied Postman collection was executed to validate API behavior including:
+The supplied Postman collection was automated and executed using Newman to validate API behavior across authentication, authorization, tenant isolation, shipment, compliance, and audit functionality.
+
+The API automation covers:
 
 * Authentication context
-* Tenant context
-* Shipment data
-* Sensor history
+* Role boundary validation
+* Tenant scope and isolation
+* Shipment data and response contract
 * No-data response (`204 No Content`)
+* Compliance approval and repeated/locked approval behavior
 * Compliance reports
-* Compliance approval and locking
 * Audit logs
-* Sensor stream ticket behavior
-* Invalid stream ticket handling
 
+Detailed API execution evidence is available in:
+
+`API Postman Collection/API-Test-Result.md`
 
 ## Accessibility
 
@@ -103,9 +124,10 @@ The executed testing identified defects related to:
 * Responsive visibility of account actions
 * UI differences from the provided design reference
 
-Detailed reproduction steps, expected/actual results, severity, priority, and environment information are available in:
+Detailed reproduction steps, expected/actual results, severity, priority, evidence and environment information are available in:
 
 `docs/Defect Report.xlsx`
+`Evidence/`
 
 ## Test Results
 
@@ -118,7 +140,7 @@ Detailed execution results are documented in:
 
 The final release recommendation is documented separately in:
 
-`docs/release-recommendation.md`
+`docs/Release-Recommendation.md`
 
 The recommendation is based on:
 
@@ -134,3 +156,5 @@ The recommendation is based on:
 AI assistance was used during preparation of this assessment for documentation support, test analysis, structuring, and review.
 
 All testing activities, observations, defect validation, and final conclusions were personally reviewed against the application behavior and assessment requirements.
+
+AI was not used to claim unexecuted tests as passed.
