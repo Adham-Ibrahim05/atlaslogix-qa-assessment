@@ -101,6 +101,32 @@ Detailed API execution evidence is available in:
 
 `API Postman Collection/API-Test-Result.md`
 
+### Performance Testing
+
+Performance testing was performed using Apache JMeter against the authenticated, read-only GET API workload.
+
+The performance test was designed to measure the behavior of the primary GET endpoints while keeping authentication outside the performance workload.
+
+The performance workload covers:
+
+* GET Auth - Current User & Permissions
+* GET Tenant Admin - List Tenants
+* GET Tenant Admin - List Users
+* GET Shipments - List
+* GET Shipments - Detail
+* GET Shipments - Sensor Latest
+* GET Shipments - Sensor History
+* GET Shipments - Sensor No Content (204)
+* GET Shipments - Compliance Report
+* GET Audit Logs
+
+The test was intentionally limited to the assessment constraints and focused on API response performance, throughput, and error behavior under the configured load.
+
+Detailed performance test configuration, execution results, observations, and conclusions are available in:
+
+* `Performance Testing/AtlasLogix-QA-Assessment.jmx`
+* `Performance Testing/Performance Test Report.csv`
+
 ## Accessibility
 
 Accessibility testing included manual keyboard and focus review covering:
