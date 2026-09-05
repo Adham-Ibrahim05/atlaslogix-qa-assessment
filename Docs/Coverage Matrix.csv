@@ -36,6 +36,7 @@ API-05,API,Sensor history endpoint,API,Covered,P1
 API-06,API,Compliance report endpoint,API,Covered,P1
 API-07,API,Stream ticket endpoint,API,Covered,P1
 API-08,API,Invalid stream ticket,API,Covered,P1
+PERF-01,Performance,"Controlled read-only API smoke with maximum 3 VUs for 30 seconds; measure p95 latency, error rate and throughput",Jmeter,Covered,P1
 A11Y-01,Accessibility,Login keyboard navigation and focus,Manual,Covered,P1
 A11Y-02,Accessibility,Dashboard keyboard navigation and focus,Manual,Covered,P1
 A11Y-03,Accessibility,Shipments page keyboard navigation/focus,Manual,Covered,P1
@@ -49,10 +50,11 @@ DES-01,Design,Compare implementation with supplied design baseline,Manual,Covere
 ,,,,,
 Coverage Summary,,,,,
 Status,Count,,,,
-Covered,45,,,,
-Total,45,,,,
+Covered,46,,,,
+Total,46,,,,
 ,,,,,
 Key Coverage Notes,,,,,
 "P0 risks: Authentication, tenant isolation, authorization, compliance approval, repeated approval, and auditability were prioritized.",,,,,
 Accessibility findings were validated through manual keyboard/focus testing. The automated axe check was blocked by the browser/tool environment.,,,,,
 Responsive testing identified a mobile visibility issue at 375×667.,,,,,
+"Performance testing covered an authenticated, read-only API workload using JMeter with a maximum of 3 virtual users for 30 seconds. Login, approval, user/tenant updates, and the SSE stream were intentionally excluded from the performance workload.",,,,,
