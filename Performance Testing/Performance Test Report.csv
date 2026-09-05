@@ -1,0 +1,12 @@
+Label,# Samples,Average,Median,90% Line,95% Line,99% Line,Min,Max,Error %,Throughput,Received KB/sec,Sent KB/sec
+GET Auth - Current User & Permissions,95,106,98,111,125,323,87,361,0.000%,3.20827,24.57,0.93
+GET Tenant Admin - List Tenants,95,97,96,107,111,117,86,120,0.000%,3.23812,24.80,0.94
+GET Tenant Admin - List Users,95,98,96,109,112,160,86,169,0.000%,3.23867,24.80,0.94
+GET Shipments - List,95,100,98,107,113,193,85,210,0.000%,3.23878,24.81,1.01
+GET Shipments - Detail,95,85,84,95,98,107,75,122,0.000%,3.25075,4.78,0.93
+GET Shipments - Sensor Latest,95,88,87,96,104,111,76,148,0.000%,3.25242,3.46,0.97
+GET Shipments - Sensor History,93,102,100,116,119,173,85,195,0.000%,3.22962,12.14,1.02
+GET Shipments - Sensor No Content (204),93,87,86,95,100,112,75,130,0.000%,3.23220,2.73,0.96
+GET Shipments - Compliance Report,93,88,86,96,100,122,74,196,0.000%,3.23501,3.69,0.99
+GET Audit Logs,93,88,86,97,100,101,78,130,0.000%,3.24766,4.31,1.01
+TOTAL,942,94,92,106,112,169,74,361,0.000%,31.32899,126.67,9.38
